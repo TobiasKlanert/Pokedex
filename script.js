@@ -1,35 +1,25 @@
-/* let pokemonID = 0;
-let pokemonType1;
-let pokemonType2;
-let typePlate1;
-let typePlate2;
-let pokemonName;
-let pokemonNumber; */
 let counterID = 1;
 let counterDataset = 41;
 
 let currentPokemonData = [];
 let currentSpeciesData = [];
+let currentEvolutionData = [];
 
 async function init() {
-  toogleLoadButton();
+  toggleDisplayNone("loadButton");
   showLoadingSpinner();
 
-  await loadData(counterID, counterDataset);
+  await loadData();
 
   currentPokemonData = pokemonBaseData;
   currentSpeciesData = pokemonSpeciesData;
+  currentEvolutionData = pokemonEvolutionData;
 
   generateOverviewPokemonCard();
-  toogleLoadButton();
-
-  /* console.log("Species: ", pokemonSpeciesData);
-  console.log("base: ", pokemonBaseData.length);
-  console.log("current: ", currentPokemonData.length);
-  console.log("Fertig"); */
+  toggleDisplayNone("loadButton");
 }
 
-async function loadData(counterID, counterDataset) {
+async function loadData() {
   for (pokemonID = counterID; pokemonID < counterDataset; pokemonID++) {
     await getPokemonBaseData(pokemonID);
     await getPokemonSpeciesData(pokemonID);
@@ -41,7 +31,7 @@ async function loadData(counterID, counterDataset) {
 function declareVariables(pokemonID) {
   let baseData = currentPokemonData[pokemonID];
   let speciesData = currentSpeciesData[pokemonID];
-  let evolutionData = pokemonEvolutionData[pokemonID];
+  let evolutionData = currentEvolutionData[pokemonID];
 
   pokemonType1 = baseData.types[0];
   pokemonType2 = baseData.types[1];
@@ -80,14 +70,11 @@ function declareVariables(pokemonID) {
     pokemonBaseStatSpAtk +
     pokemonBaseStatSpDef +
     pokemonBaseStatSpeed;
+
   evolutionTest = evolutionData;
   pokemonEvolution1 = evolutionData.evolutionChain[0];
   pokemonEvolution2 = evolutionData.evolutionChain[1];
   pokemonEvolution3 = evolutionData.evolutionChain[2];
-  /*   console.log(evolutionTest);
-  console.log(pokemonEvolution1);
-  console.log(pokemonEvolution2);
-  console.log(pokemonEvolution3); */
 }
 
 function getPokemonGender(speciesData) {
@@ -158,26 +145,22 @@ async function loadMore() {
   counterID = counterDataset;
   counterDataset += 20;
 
-  toogleLoadButton();
-  showLoadingSpinner();
-  await loadData(counterID, counterDataset);
-  currentPokemonData = pokemonBaseData;
-  currentSpeciesData = pokemonSpeciesData;
-  generateOverviewPokemonCard();
-  toogleLoadButton();
+  await init();
+
   window.scrollTo(0, document.body.scrollHeight);
   document.getElementById("pokemonSearch").value = "";
-  console.log("base: ", pokemonBaseData.length);
-  console.log("current: ", currentPokemonData.length);
 }
 
 function filterPokemonByName(pokemonName) {
-  currentPokemonData = pokemonBaseData.filter(pokemon =>
+  currentPokemonData = pokemonBaseData.filter((pokemon) =>
     pokemon.name.toLowerCase().includes(pokemonName.toLowerCase())
   );
-  
-  currentSpeciesData = currentPokemonData.map(pokemon => {
-    return pokemonSpeciesData.find(species => species.number === pokemon.number) || {};
+
+  currentSpeciesData = currentPokemonData.map((pokemon) => {
+    return (
+      pokemonSpeciesData.find((species) => species.number === pokemon.number) ||
+      {}
+    );
   });
 
   generateOverviewPokemonCard();
@@ -188,6 +171,12 @@ document.addEventListener("DOMContentLoaded", function () {
     .getElementById("pokemonSearch")
     .addEventListener("input", function (event) {
       const searchQuery = event.target.value;
-      filterPokemonByName(searchQuery);
+      if (searchQuery.length >= 3) {
+        filterPokemonByName(searchQuery);
+      } else if (searchQuery.length === 0) {
+        currentPokemonData = pokemonBaseData;
+        currentSpeciesData = pokemonSpeciesData;
+        generateOverviewPokemonCard();
+      }
     });
 });

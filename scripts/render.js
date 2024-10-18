@@ -7,12 +7,8 @@ function showLoadingSpinner() {
     </div>`;
 }
 
-function toggleDialog() {
-  document.getElementById("pokemonDetailBody").classList.toggle("d-none");
-}
-
-function toogleLoadButton() {
-  document.getElementById("loadButton").classList.toggle("d-none");
+function toggleDisplayNone(element) {
+  document.getElementById(element).classList.toggle("d-none");
 }
 
 function generateOverviewPokemonCard() {

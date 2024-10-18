@@ -34,7 +34,7 @@ function getDetailPokemonCardRef(pokemonID) {
             <div class="pokemon-detail-artwork">
                 <div class="pokemon-detail-header">
                     <span class="pokemon-detail-number">${pokemonNumber}</span>
-                    <span onclick="toggleDialog()" class="close-dialog">&times;</span>
+                    <span onclick="toggleDisplayNone('pokemonDetailBody')" class="close-dialog">&times;</span>
                 </div>
                 <h2 class="pokemon-detail-name">${pokemonName}</h2>
                 <div class="pokemon-types flex-direction-row">
