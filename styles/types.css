@@ -1,0 +1,203 @@
+.pokemon-card.normal {
+    background-color: #7c7c63;
+}
+
+.pokemon-card.fire {
+    background-color: #cc6b25;
+}
+
+.pokemon-card.water {
+    background-color: #3b73c0;
+}
+
+.pokemon-card.grass {
+    background-color: #5a9d2f;
+}
+
+.pokemon-card.electric {
+    background-color: #d6c32c;
+}
+
+.pokemon-card.ice {
+    background-color: #72a8a2;
+}
+
+.pokemon-card.fighting {
+    background-color: #992727;
+}
+
+.pokemon-card.poison {
+    background-color: #8e2a8e;
+}
+
+.pokemon-card.ground {
+    background-color: #b4933c;
+}
+
+.pokemon-card.flying {
+    background-color: #9055c6;
+}
+
+.pokemon-card.psychic {
+    background-color: #d06a83;
+}
+
+.pokemon-card.bug {
+    background-color: #7a8b18;
+}
+
+.pokemon-card.rock {
+    background-color: #9d8430;
+}
+
+.pokemon-card.ghost {
+    background-color: #5e4e8b;
+}
+
+.pokemon-card.dragon {
+    background-color: #5a24e5;
+}
+
+.pokemon-card.dark {
+    background-color: #4f3c3c;
+}
+
+.pokemon-card.fairy {
+    background-color: #a053a6;
+}
+
+.detail-normal {
+    background-color: #7c7c63;
+}
+
+.detail-fire {
+    background-color: #cc6b25;
+}
+
+.detail-water {
+    background-color: #3b73c0;
+}
+
+.detail-grass {
+    background-color: #5a9d2f;
+}
+
+.detail-electric {
+    background-color: #d6c32c;
+}
+
+.detail-ice {
+    background-color: #72a8a2;
+}
+
+.detail-fighting {
+    background-color: #992727;
+}
+
+.detail-poison {
+    background-color: #8e2a8e;
+}
+
+.detail-ground {
+    background-color: #b4933c;
+}
+
+.detail-flying {
+    background-color: #9055c6;
+}
+
+.detail-psychic {
+    background-color: #d06a83;
+}
+
+.detail-bug {
+    background-color: #7a8b18;
+}   
+
+.detail-rock {
+    background-color: #9d8430;
+}
+
+.detail-ghost {
+    background-color: #5e4e8b;
+}
+
+.detail-dragon {
+    background-color: #5a24e5;
+}
+
+.detail-dark {
+    background-color: #4f3c3c;
+}
+
+.detail-fairy {
+    background-color: #a053a6;
+}
+
+.type.normal {
+    background-color: #a8a77a;
+}
+
+.type.fire {
+    background-color: #ee8130;
+}
+
+.type.water {
+    background-color: #6390f0;
+}
+
+.type.grass {
+    background-color: #7ae24b;
+}
+
+.type.electric {
+    background-color: #f7d02c;
+}
+
+.type.ice {
+    background-color: #96d9d6;
+}
+
+.type.fighting {
+    background-color: #c22e28;
+}
+
+.type.poison {
+    background-color: #a33ea1;
+}
+
+.type.ground {
+    background-color: #e2bf6d;
+}
+
+.type.flying {
+    background-color: #a98ff3;
+}
+
+.type.psychic {
+    background-color: #f95587;
+}
+
+.type.bug {
+    background-color: #a6b91a;
+}
+
+.type.rock {
+    background-color: #b6a137;
+}
+
+.type.ghost {
+    background-color: #735797;
+}
+
+.type.dragon {
+    background-color: #6f35fc;
+}
+
+.type.dark {
+    background-color: #705746;
+}
+
+.type.fairy {
+    background-color: #d685e0;
+}

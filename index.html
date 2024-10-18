@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokédex</title>
+
+    <link rel="shortcut icon" href="./img/pokeball.png" type="image/x-icon" />
+
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./styles/standard.css" />
+    <link rel="stylesheet" href="./styles/assets.css" />
+    <link rel="stylesheet" href="./styles/types.css" />
+    <link rel="stylesheet" href="./styles/responsive.css" />
+    <link rel="stylesheet" href="./styles/dialog.css" />
+
+    <script src="./script.js"></script>
+    <script src="./scripts/remoteStorage.js"></script>
+    <script src="./scripts/render.js"></script>
+    <script src="./scripts/templates.js"></script>
+  </head>
+  <body onload="init()">
+    <header>
+      <div class="container-logo">
+        <img class="logo" src="./img/pokeball.png" alt="Pokéball" />
+        <span class="title">Pokédex</span>
+      </div>
+      <div class="search-wrapper">
+        <input id="pokemonSearch" type="text" class="search-input" placeholder="Search..." />
+        <span class="search-icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="feather feather-search"
+            viewBox="0 0 24 24"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </span>
+      </div>
+    </header>
+    <main>
+      <section class="main-container" id="mainContent">
+
+      </section>
+      <div class="button-container">
+        <button id="loadButton" onclick="loadMore()" class="load-button">Load More</button>
+      </div>
+    </main>
+    <footer>   
+      Pokédex<br />
+      ©2024 Tobias Klanert
+    </footer>
+  </body>
+</html>
