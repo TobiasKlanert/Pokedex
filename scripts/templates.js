@@ -59,7 +59,7 @@ function getDetailPokemonCardRef(pokemonID) {
                     <button id="tabBaseStats" class="tablinks" onclick="generateTabContentBaseStats()">
                         Base Stats
                     </button>
-                    <button id="tabEvolution" class="tablinks" onclick="generateTabContentEvolution()">
+                    <button id="tabEvolution" class="tablinks" onclick="generateTabContentEvolution(pokemonEvolutions)">
                         Evolution
                     </button>
                 </div>
@@ -220,8 +220,12 @@ function getTabContentBaseStatsRef() {
       `;
 }
 
-function getTabContentEvolutionRef() {
+function getTabContentEvolutionRef(evolutionID) {
+  let evolution = pokemonEvolutions[evolutionID];
   return `
-        <h3>Evolution</h3>
+    <div class="pokemon-evolution-info">
+      <img class="pokemon-evolution-image" src="${evolution.pokemonEvolutionImage}" alt="">
+      <span>#${evolution.pokemonEvolutionID}: ${evolution.pokemonEvolutionName}</span>
+    </div>
         `;
 }

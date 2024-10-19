@@ -1,6 +1,6 @@
 function showLoadingSpinner() {
-  let mainContent = document.getElementById('mainContent');
-  mainContent.innerHTML = '';
+  let mainContent = document.getElementById("mainContent");
+  mainContent.innerHTML = "";
   mainContent.innerHTML = `
     <div id="loadingSpinner" class="loading-spinner">
         <img class="spinner" src="./img/pokeball.png" alt="" />
@@ -13,23 +13,22 @@ function toggleDisplayNone(element) {
 
 function generateOverviewPokemonCard() {
   let pokedexContentRef = document.getElementById("mainContent");
-  console.log("Render Start");
-  
-  pokedexContentRef.innerHTML = '';
+
+  pokedexContentRef.innerHTML = "";
 
   for (pokemonID = 0; pokemonID < currentPokemonData.length; pokemonID++) {
     declareVariables(pokemonID);
     pokedexContentRef.innerHTML += getOverviewPokemonCardRef(pokemonID);
   }
-  console.log("Render End");
 }
 
 function generatePokemonDetailCard(pokemonID) {
   let dialogContentRef = document.getElementById("pokemonDetailDialog");
 
-  dialogContentRef.innerHTML = '';
-  
+  dialogContentRef.innerHTML = "";
+
   declareVariables(pokemonID);
+  declareEvolutionVariables(pokemonID);
   dialogContentRef.innerHTML = getDetailPokemonCardRef(pokemonID);
   generateTabContentAbout();
 }
@@ -37,35 +36,45 @@ function generatePokemonDetailCard(pokemonID) {
 function generateTabContentAbout() {
   let tabContentRef = document.getElementById("tabContent");
 
-  tabContentRef.innerHTML = '';
+  tabContentRef.innerHTML = "";
   tabContentRef.innerHTML = getTabContentAboutRef();
-  markedActive('tabAbout');
+  markedActive("tabAbout");
 }
 
 function generateTabContentBaseStats() {
   let tabContentRef = document.getElementById("tabContent");
 
-  tabContentRef.innerHTML = '';
+  tabContentRef.innerHTML = "";
   tabContentRef.innerHTML = getTabContentBaseStatsRef();
-  markedActive('tabBaseStats');
+  markedActive("tabBaseStats");
 }
 
-function generateTabContentEvolution() {
+function generateTabContentEvolution(pokemonEvolutions) {
   let tabContentRef = document.getElementById("tabContent");
 
-  tabContentRef.innerHTML = '';
-  tabContentRef.innerHTML = getTabContentEvolutionRef();
+  tabContentRef.innerHTML = `
+  <div id="evolutionContainer" class="evolution-container">
+  </div>
+`;
+
+let evolutionContentRef = document.getElementById("evolutionContainer");
+
+  for (let evolutionID = 0; evolutionID < pokemonEvolutions.length; evolutionID++) {
+    evolutionContentRef.innerHTML += getTabContentEvolutionRef(evolutionID);
+  }
+
   markedActive('tabEvolution');
 }
+
 
 function markedActive(tab) {
   let tabClass = document.getElementById(tab);
 
-  document.getElementById('tabAbout').classList.remove('activeTab');
-  document.getElementById('tabBaseStats').classList.remove('activeTab');
-  document.getElementById('tabEvolution').classList.remove('activeTab');
+  document.getElementById("tabAbout").classList.remove("activeTab");
+  document.getElementById("tabBaseStats").classList.remove("activeTab");
+  document.getElementById("tabEvolution").classList.remove("activeTab");
 
-  tabClass.classList.add('activeTab');  
+  tabClass.classList.add("activeTab");
 }
 
 function showPreviousPokemon(pokemonID) {
@@ -74,7 +83,7 @@ function showPreviousPokemon(pokemonID) {
   }
 }
 
-function showNextPokemon(pokemonID) {  
+function showNextPokemon(pokemonID) {
   if (pokemonID + 1 <= currentPokemonData.length - 1) {
     generatePokemonDetailCard(pokemonID + 1);
   }

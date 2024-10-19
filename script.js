@@ -31,7 +31,6 @@ async function loadData() {
 function declareVariables(pokemonID) {
   let baseData = currentPokemonData[pokemonID];
   let speciesData = currentSpeciesData[pokemonID];
-  let evolutionData = currentEvolutionData[pokemonID];
 
   pokemonType1 = baseData.types[0];
   pokemonType2 = baseData.types[1];
@@ -70,14 +69,20 @@ function declareVariables(pokemonID) {
     pokemonBaseStatSpAtk +
     pokemonBaseStatSpDef +
     pokemonBaseStatSpeed;
+}
 
-  evolutionTest = evolutionData;
-  pokemonEvolution1 = evolutionData.evolutionChain[0];
-  pokemonEvolution2 = evolutionData.evolutionChain[1];
-  pokemonEvolution3 = evolutionData.evolutionChain[2];
+function declareEvolutionVariables(pokemonID) {
+  let evolutionData = currentEvolutionData[pokemonID];
+  pokemonEvolutions = [];
 
-  console.log(currentEvolutionData[pokemonID]);
-  
+  for (let index = 0; index < evolutionData.evolutionChain.length; index++) {
+    let evolution = {
+      pokemonEvolutionID: evolutionData.evolutionChain[index].pokemonID,
+      pokemonEvolutionName: firstLetterUpperCase(evolutionData.evolutionChain[index].name),
+      pokemonEvolutionImage: evolutionData.evolutionChain[index].imageUrl
+    }
+    pokemonEvolutions.push(evolution);
+  }
 }
 
 function getPokemonGender(speciesData) {
@@ -166,6 +171,13 @@ function filterPokemonByName(pokemonName) {
     );
   });
 
+  currentEvolutionData = currentPokemonData.map((pokemon) => {
+    return (
+      pokemonEvolutionData.find((evolution) => evolution.pokemonID === pokemon.number) ||
+      {}
+    );
+  });
+
   generateOverviewPokemonCard();
 }
 
@@ -179,6 +191,7 @@ document.addEventListener("DOMContentLoaded", function () {
       } else if (searchQuery.length === 0) {
         currentPokemonData = pokemonBaseData;
         currentSpeciesData = pokemonSpeciesData;
+        currentEvolutionData = pokemonEvolutionData;
         generateOverviewPokemonCard();
       }
     });

@@ -8,7 +8,6 @@ async function getPokemonBaseData(pokemonID) {
   try {
     const pokemonResponse = await fetch(pokemonUrl);
     const pokemonData = await pokemonResponse.json();
-    console.log("Pokemon loaded: ", pokemonID);
 
     const newPokemon = generatePokemonBaseDataArr(pokemonData);
     pokemonBaseData.push(newPokemon);
@@ -43,8 +42,10 @@ async function getPokemonEvolutionData(pokemonID) {
     const evolutionChainResponse = await fetch(evolutionChainUrl);
     const evolutionChainData = await evolutionChainResponse.json();
 
-    const evolutionArray = await generateEvolutionDataArr(evolutionChainData.chain);
-    
+    const evolutionArray = await generateEvolutionDataArr(
+      evolutionChainData.chain
+    );
+
     pokemonEvolutionData.push({
       pokemonID: pokemonID,
       evolutionChain: evolutionArray,
@@ -85,29 +86,29 @@ function generatePokemonSpeciesDataArr(speciesData, pokemonID) {
 
 async function generateEvolutionDataArr(chain) {
   let evolutions = [];
-  let currentChain = chain;
 
-  while (currentChain) {
-    const speciesUrl = currentChain.species.url;
+  function traverseEvolutionChain(chain) {
+    const speciesUrl = chain.species.url;
     const pokemonIdent = extractPokemonIDFromURL(speciesUrl);
-    
+
     evolutions.push({
-      name: currentChain.species.name,
+      name: chain.species.name,
       pokemonID: pokemonIdent,
-      imageUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonIdent}.png`
+      imageUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonIdent}.png`,
     });
-    
-    if (currentChain.evolves_to.length > 0) {
-      currentChain = currentChain.evolves_to[0];
-    } else {
-      currentChain = null;
+
+    if (chain.evolves_to.length > 0) {
+      for (const nextEvolution of chain.evolves_to) {
+        traverseEvolutionChain(nextEvolution);
+      }
     }
   }
+
+  traverseEvolutionChain(chain);
   return evolutions;
 }
 
 function extractPokemonIDFromURL(url) {
-  // Extract the Pokémon ID from the species URL (e.g., https://pokeapi.co/api/v2/pokemon-species/{pokemonID}/)
-  const urlParts = url.split('/');
+  const urlParts = url.split("/");
   return urlParts[urlParts.length - 2];
 }

@@ -151,7 +151,7 @@
 
 .bar-container {
   width: 100%;
-  background-color: #E0E0E0;
+  background-color: #e0e0e0;
   border-radius: 5px;
   height: 20px;
   position: relative;
@@ -197,5 +197,59 @@
 
 .nav-button:hover .arrow-img {
   opacity: 0.5;
+}
+
+/* .pokemon-evolution-info {
+  display: inline-block;
+  text-align: center;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 0 10px;
+  width: 100px;
+} */
+
+.pokemon-evolution-image {
+  width: 72px;
+  height: auto;
+}
+
+/* .evolution-arrow {
+  display: inline-block;
+  font-size: 24px;
+  margin: 0 10px;
+  vertical-align: middle;
+  line-height: 100px; 
+} */
+
+.evolution-container {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Zentriert die Elemente */
+  flex-wrap: wrap;
+}
+
+.pokemon-evolution-info {
+  background-color: #f9f9f9; /* Weiße Hintergrundfarbe für die Karten */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Leichter Schatten für Tiefe */
+  border-radius: 10px; /* Abgerundete Ecken */
+  padding: 15px; /* Innenabstand der Karte */
+  margin: 10px; /* Vertikaler Abstand zwischen den Karten */
+  width: 150px; /* Feste Breite für die Karten */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.pokemon-evolution-image {
+  width: 72px; /* Fixe Breite für die Pokémon-Bilder */
+  height: auto; /* Automatische Höhe, um das Verhältnis beizubehalten */
+}
+
+.pokemon-evolution-name {
+  font-size: 16px; /* Größe der Schrift für den Namen */
+  font-weight: bold; /* Fettdruck für den Namen */
+  margin-top: 10px; /* Abstand zum Bild */
 }
 
