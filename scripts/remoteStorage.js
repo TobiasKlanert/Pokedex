@@ -43,7 +43,8 @@ async function getPokemonEvolutionData(pokemonID) {
     const evolutionChainResponse = await fetch(evolutionChainUrl);
     const evolutionChainData = await evolutionChainResponse.json();
 
-    const evolutionArray = generateEvolutionDataArr(evolutionChainData.chain);
+    const evolutionArray = await generateEvolutionDataArr(evolutionChainData.chain);
+    
     pokemonEvolutionData.push({
       pokemonID: pokemonID,
       evolutionChain: evolutionArray,
@@ -82,12 +83,20 @@ function generatePokemonSpeciesDataArr(speciesData, pokemonID) {
   return pokemonSpeciesData;
 }
 
-function generateEvolutionDataArr(chain) {
+async function generateEvolutionDataArr(chain) {
   let evolutions = [];
   let currentChain = chain;
 
   while (currentChain) {
-    evolutions.push(currentChain.species.name);
+    const speciesUrl = currentChain.species.url;
+    const pokemonIdent = extractPokemonIDFromURL(speciesUrl);
+    
+    evolutions.push({
+      name: currentChain.species.name,
+      pokemonID: pokemonIdent,
+      imageUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonIdent}.png`
+    });
+    
     if (currentChain.evolves_to.length > 0) {
       currentChain = currentChain.evolves_to[0];
     } else {
@@ -95,4 +104,10 @@ function generateEvolutionDataArr(chain) {
     }
   }
   return evolutions;
+}
+
+function extractPokemonIDFromURL(url) {
+  // Extract the Pokémon ID from the species URL (e.g., https://pokeapi.co/api/v2/pokemon-species/{pokemonID}/)
+  const urlParts = url.split('/');
+  return urlParts[urlParts.length - 2];
 }

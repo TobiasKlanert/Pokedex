@@ -75,6 +75,9 @@ function declareVariables(pokemonID) {
   pokemonEvolution1 = evolutionData.evolutionChain[0];
   pokemonEvolution2 = evolutionData.evolutionChain[1];
   pokemonEvolution3 = evolutionData.evolutionChain[2];
+
+  console.log(currentEvolutionData[pokemonID]);
+  
 }
 
 function getPokemonGender(speciesData) {

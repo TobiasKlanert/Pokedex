@@ -80,7 +80,7 @@ function getDetailPokemonCardRef(pokemonID) {
 }
 
 function getTabContentAboutRef() {
-    return `
+  return `
         <table class="pokemon-info-table">
             <tr>
                 <td>Species:</td>
@@ -117,29 +117,30 @@ function getTabContentAboutRef() {
 }
 
 function getTabContentBaseStatsRef() {
-    // Maximale Basiswerte für die Berechnung der Balkenlänge
-    const maxHP = 255;
-    const maxAttack = 190;
-    const maxDefense = 250;
-    const maxSpAtk = 194;
-    const maxSpDef = 250;
-    const maxSpeed = 200;
-    const maxTotal = 1125;
+  const maxHP = 255;
+  const maxAttack = 190;
+  const maxDefense = 250;
+  const maxSpAtk = 194;
+  const maxSpDef = 250;
+  const maxSpeed = 200;
+  const maxTotal = 1125;
 
-    // Berechnung der Balkenlängen (im Verhältnis zum Maximalwert)
-    function getBarWidth(value, maxValue) {
-        const maxBarWidth = 100; // maximale Breite des Balkens in Prozent
-        return (value / maxValue) * maxBarWidth;
-    }
+  function getBarWidth(value, maxValue) {
+    const maxBarWidth = 100; // maximale Breite des Balkens in Prozent
+    return (value / maxValue) * maxBarWidth;
+  }
 
-    return `
+  return `
         <table class="pokemon-info-table">
         <tr>
           <td>HP</td>
           <td class="text-center">${pokemonBaseStatHP}</td>
           <td>
             <div class="bar-container">
-              <div class="bar" style="width: ${getBarWidth(pokemonBaseStatHP, maxHP)}%; background-color: #FF5959;"></div>
+              <div class="bar" style="width: ${getBarWidth(
+                pokemonBaseStatHP,
+                maxHP
+              )}%; background-color: #FF5959;"></div>
             </div>
           </td>
         </tr>
@@ -148,7 +149,10 @@ function getTabContentBaseStatsRef() {
           <td class="text-center">${pokemonBaseStatAtk}</td>
           <td>
             <div class="bar-container">
-              <div class="bar" style="width: ${getBarWidth(pokemonBaseStatAtk, maxAttack)}%; background-color: #F5AC78;"></div>
+              <div class="bar" style="width: ${getBarWidth(
+                pokemonBaseStatAtk,
+                maxAttack
+              )}%; background-color: #F5AC78;"></div>
             </div>
           </td>
         </tr>
@@ -157,7 +161,10 @@ function getTabContentBaseStatsRef() {
           <td class="text-center">${pokemonBaseStatDef}</td>
           <td>
             <div class="bar-container">
-              <div class="bar" style="width: ${getBarWidth(pokemonBaseStatDef, maxDefense)}%; background-color: #FAE078;"></div>
+              <div class="bar" style="width: ${getBarWidth(
+                pokemonBaseStatDef,
+                maxDefense
+              )}%; background-color: #FAE078;"></div>
             </div>
           </td>
         </tr>
@@ -166,7 +173,10 @@ function getTabContentBaseStatsRef() {
           <td class="text-center">${pokemonBaseStatSpAtk}</td>
           <td>
             <div class="bar-container">
-              <div class="bar" style="width: ${getBarWidth(pokemonBaseStatSpAtk, maxSpAtk)}%; background-color: #9DB7F5;"></div>
+              <div class="bar" style="width: ${getBarWidth(
+                pokemonBaseStatSpAtk,
+                maxSpAtk
+              )}%; background-color: #9DB7F5;"></div>
             </div>
           </td>
         </tr>
@@ -175,7 +185,10 @@ function getTabContentBaseStatsRef() {
           <td class="text-center">${pokemonBaseStatSpDef}</td>
           <td>
             <div class="bar-container">
-              <div class="bar" style="width: ${getBarWidth(pokemonBaseStatSpDef, maxSpDef)}%; background-color: #A7DB8D;"></div>
+              <div class="bar" style="width: ${getBarWidth(
+                pokemonBaseStatSpDef,
+                maxSpDef
+              )}%; background-color: #A7DB8D;"></div>
             </div>
           </td>
         </tr>
@@ -184,7 +197,10 @@ function getTabContentBaseStatsRef() {
           <td class="text-center">${pokemonBaseStatSpeed}</td>
           <td>
             <div class="bar-container">
-              <div class="bar" style="width: ${getBarWidth(pokemonBaseStatSpeed, maxSpeed)}%; background-color: #FA92B2;"></div>
+              <div class="bar" style="width: ${getBarWidth(
+                pokemonBaseStatSpeed,
+                maxSpeed
+              )}%; background-color: #FA92B2;"></div>
             </div>
           </td>
         </tr>
@@ -193,7 +209,10 @@ function getTabContentBaseStatsRef() {
           <td class="text-center">${pokemonBaseStatTotal}</td>
           <td>
             <div class="bar-container">
-              <div class="bar" style="width: ${getBarWidth(pokemonBaseStatTotal, maxTotal)}%; background-color: #D3D3D3;"></div>
+              <div class="bar" style="width: ${getBarWidth(
+                pokemonBaseStatTotal,
+                maxTotal
+              )}%; background-color: #D3D3D3;"></div>
             </div>
           </td>
         </tr>
@@ -202,7 +221,7 @@ function getTabContentBaseStatsRef() {
 }
 
 function getTabContentEvolutionRef() {
-    return `
+  return `
         <h3>Evolution</h3>
         `;
 }

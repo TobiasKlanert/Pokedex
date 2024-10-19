@@ -62,6 +62,10 @@
     background-color: #4f3c3c;
 }
 
+.pokemon-card.steel {
+    background-color: #b7b9d0;
+}
+
 .pokemon-card.fairy {
     background-color: #a053a6;
 }
@@ -130,6 +134,10 @@
     background-color: #4f3c3c;
 }
 
+.detail-steel {
+    background-color: #b7b9d0;
+}
+
 .detail-fairy {
     background-color: #a053a6;
 }
@@ -196,6 +204,10 @@
 
 .type.dark {
     background-color: #705746;
+}
+
+.type.steel {
+    background-color: #d1d3e0;
 }
 
 .type.fairy {
