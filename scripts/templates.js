@@ -227,11 +227,11 @@ function getTabContentBaseStatsRef(baseStats) {
           </tr>
           <tr>
             <td>Total</td>
-            <td class="text-right">${baseStats.pokemonBaseStatTotal}</td>
+            <td class="text-right">${baseStats.pokemonBaseStatTotal()}</td>
             <td>
               <div class="bar-container">
                 <div class="bar" style="width: ${getBarWidth(
-                  baseStats.pokemonBaseStatTotal,
+                  baseStats.pokemonBaseStatTotal(),
                   maxTotal
                 )}%; background-color: #D3D3D3;"></div>
               </div>

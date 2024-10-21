@@ -123,29 +123,20 @@ function declareSpeciesDataVariables(pokemonID) {
 function declareBaseStatsVariables(pokemonID) {
   let baseData = currentPokemonData[pokemonID];
 
-  let pokemonBaseStatHP = baseData.base_stats[0].value;
-  let pokemonBaseStatAtk = baseData.base_stats[1].value;
-  let pokemonBaseStatDef = baseData.base_stats[2].value;
-  let pokemonBaseStatSpAtk = baseData.base_stats[3].value;
-  let pokemonBaseStatSpDef = baseData.base_stats[4].value;
-  let pokemonBaseStatSpeed = baseData.base_stats[5].value;
-
-  let pokemonBaseStatTotal =
-    pokemonBaseStatHP +
-    pokemonBaseStatAtk +
-    pokemonBaseStatDef +
-    pokemonBaseStatSpAtk +
-    pokemonBaseStatSpDef +
-    pokemonBaseStatSpeed;
-
   return {
-    pokemonBaseStatHP,
-    pokemonBaseStatAtk,
-    pokemonBaseStatDef,
-    pokemonBaseStatSpAtk,
-    pokemonBaseStatSpDef,
-    pokemonBaseStatSpeed,
-    pokemonBaseStatTotal,
+    pokemonBaseStatHP: baseData.base_stats[0].value,
+    pokemonBaseStatAtk: baseData.base_stats[1].value,
+    pokemonBaseStatDef: baseData.base_stats[2].value,
+    pokemonBaseStatSpAtk: baseData.base_stats[3].value,
+    pokemonBaseStatSpDef: baseData.base_stats[4].value,
+    pokemonBaseStatSpeed: baseData.base_stats[5].value,
+    pokemonBaseStatTotal: function () {
+      let baseStatTotal = 0;
+      for (let index = 0; index < baseData.base_stats.length; index++) {
+        baseStatTotal += baseData.base_stats[index].value;
+      }
+      return baseStatTotal;
+    },
   };
 }
 
