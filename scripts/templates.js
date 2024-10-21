@@ -82,7 +82,7 @@ function getDetailPokemonCardRef(pokemonID) {
               <button
                 id="tabEvolution"
                 class="dialog-tablink"
-                onclick="generateTabContentEvolution(pokemonEvolutions)"
+                onclick="generateTabContentEvolution(${pokemonID})"
               >
                 Evolution
               </button>
@@ -150,11 +150,6 @@ function getTabContentBaseStatsRef() {
   const maxSpDef = 250;
   const maxSpeed = 200;
   const maxTotal = 1125;
-
-  function getBarWidth(value, maxValue) {
-    const maxBarWidth = 100; // maximale Breite des Balkens in Prozent
-    return (value / maxValue) * maxBarWidth;
-  }
 
   return `
           <table class="pokemon-info-table">
@@ -246,8 +241,8 @@ function getTabContentBaseStatsRef() {
         `;
 }
 
-function getTabContentEvolutionRef(evolutionID) {
-  let evolution = pokemonEvolutions[evolutionID];
+function getTabContentEvolutionRef(evolutionID, evolutions) {
+  let evolution = evolutions[evolutionID];
   return `
       <div class="pokemon-evolution-info">
         <img class="pokemon-evolution-image" src="${evolution.pokemonEvolutionImage}" alt="">

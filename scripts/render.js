@@ -32,7 +32,6 @@ function generatePokemonDetailCard(pokemonID) {
   dialogContentRef.innerHTML = "";
 
   declareVariables(pokemonID);
-  declareEvolutionVariables(pokemonID);
   dialogContentRef.innerHTML = getDetailPokemonCardRef(pokemonID);
   generateTabContentAbout();
   
@@ -55,8 +54,9 @@ function generateTabContentBaseStats() {
   markedActive("tabBaseStats");
 }
 
-function generateTabContentEvolution(pokemonEvolutions) {
+function generateTabContentEvolution(pokemonID) {
   let tabContentRef = document.getElementById("tabContent");
+  const evolutions = declareEvolutionVariables(pokemonID);
 
   tabContentRef.innerHTML = `
   <div id="evolutionContainer" class="evolution-container">
@@ -65,13 +65,12 @@ function generateTabContentEvolution(pokemonEvolutions) {
 
 let evolutionContentRef = document.getElementById("evolutionContainer");
 
-  for (let evolutionID = 0; evolutionID < pokemonEvolutions.length; evolutionID++) {
-    evolutionContentRef.innerHTML += getTabContentEvolutionRef(evolutionID);
+  for (let evolutionID = 0; evolutionID < evolutions.length; evolutionID++) {
+    evolutionContentRef.innerHTML += getTabContentEvolutionRef(evolutionID, evolutions);
   }
 
   markedActive('tabEvolution');
 }
-
 
 function markedActive(tab) {
   let tabClass = document.getElementById(tab);
@@ -92,5 +91,49 @@ function showPreviousPokemon(pokemonID) {
 function showNextPokemon(pokemonID) {
   if (pokemonID + 1 <= currentPokemonData.length - 1) {
     generatePokemonDetailCard(pokemonID + 1);
+  }
+}
+
+function generatePokemonNumber(pokemonID) {
+  let pokemonNumber = pokemonID + 1;
+  switch (true) {
+    case pokemonNumber < 10:
+      return "#000" + pokemonNumber;
+    case pokemonNumber < 100:
+      return "#00" + pokemonNumber;
+    case pokemonNumber < 1000:
+      return "#0" + pokemonNumber;
+    case pokemonNumber > 1000:
+      return "#" + pokemonNumber;
+    default:
+      return "###";
+  }
+}
+
+function getPokemonGender(speciesData) {
+  const male = `<img class="symbol" src="./img/male.png" alt="male">`;
+  const female = `<img class="symbol" src="./img/femail.png" alt="femail">`;
+
+  switch (speciesData.gender) {
+    case -1:
+      return "asexual";
+    case 0:
+      return `${male} 100%`;
+    case 1:
+      return `${male} 87.5% / ${female} 12.5%`;
+    case 2:
+      return `${male} 75% / ${female} 25%`;
+    case 3:
+      return `${male} 62.5% / ${female} 37.5%`;
+    case 4:
+      return `${male} 50% / ${female} 50%`;
+    case 5:
+      return `${male} 37.5% / ${female} 62.5%`;
+    case 6:
+      return `${male} 25% / ${female} 75%`;
+    case 7:
+      return `${male} 12.5% / ${female} 87.5%`;
+    case 8:
+      return `${female} 100%`;
   }
 }
