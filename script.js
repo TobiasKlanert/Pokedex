@@ -196,3 +196,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 });
+
+function stopEventBubbling(event) {
+  event.stopPropagation();
+}

@@ -40,6 +40,7 @@
     align-items: center;
     color: white;
     z-index: 2;
+    margin: 16px 0;
 }
 
 .pokemon-name {
@@ -65,6 +66,8 @@
 }
 
 .type {
+    display: flex;
+    align-items: center;
     border-radius: 5px;
     padding: 5px 10px;
     color: white;
@@ -73,7 +76,7 @@
 }
 
 .pokemon-image {
-    max-width: 152px;
+    max-width: 172px;
     height: auto;
 }
 

@@ -16,11 +16,36 @@
     }
 }
 
+@media(max-width: 600px) {
+    .dialog-pokemon-name {
+        margin-bottom: 5px;
+    }
+    .pokemon-info-table td:nth-child(3) {
+        width: 200px !important;
+    }
+}
+
+@media(max-width: 400px) {
+    .pokemon-info-table td:nth-child(3) {
+        width: 150px !important;
+    }
+}
+
 @media(max-width: 350px) {
     .pokemon-card {
         width: 280px;
     }
     .card-background {
         width: 85%;
+    }
+
+    .background-pokeball {
+        transform: translateY(-40%) translateX(20px) rotate(45deg) !important;
+    }
+}
+
+@media(max-height: 700px) {
+    .pokemon-info-table td:nth-child(3) {
+        padding-right: 10px;
     }
 }

@@ -39,8 +39,8 @@
     z-index: 2 !important;
 }
 
-.text-center {
-    text-align: center;
+.text-right {
+    text-align: right;
 }
 
 .container-logo {
@@ -103,4 +103,8 @@
     height: 20px;
     stroke-width: 2;
     stroke: #aaa;
+}
+
+.hide-scrollbar {
+    overflow: hidden;
 }

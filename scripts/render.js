@@ -9,6 +9,10 @@ function showLoadingSpinner() {
 
 function toggleDisplayNone(element) {
   document.getElementById(element).classList.toggle("d-none");
+
+  if (element === 'pokemonDetailBody') {
+    document.body.classList.remove("hide-scrollbar");
+  }
 }
 
 function generateOverviewPokemonCard() {
@@ -31,6 +35,8 @@ function generatePokemonDetailCard(pokemonID) {
   declareEvolutionVariables(pokemonID);
   dialogContentRef.innerHTML = getDetailPokemonCardRef(pokemonID);
   generateTabContentAbout();
+  
+  document.body.classList.add("hide-scrollbar");
 }
 
 function generateTabContentAbout() {
