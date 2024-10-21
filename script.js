@@ -51,8 +51,9 @@ function filterPokemonByName(pokemonName) {
 
   currentEvolutionData = currentPokemonData.map((pokemon) => {
     return (
-      pokemonEvolutionData.find((evolution) => evolution.pokemonID === pokemon.number) ||
-      {}
+      pokemonEvolutionData.find(
+        (evolution) => evolution.pokemonID === pokemon.number
+      ) || {}
     );
   });
 
@@ -75,48 +76,77 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-//TODO: seperate functions -> base data, about, base stats, evolution
-function declareVariables(pokemonID) {
+function declareBaseDataVariables(pokemonID) {
   let baseData = currentPokemonData[pokemonID];
+
+  return {
+    pokemonType1: baseData.types[0],
+    pokemonType2: baseData.types[1],
+    typePlate1: firstLetterUpperCase(baseData.types[0]),
+    typePlate2: firstLetterUpperCase(baseData.types[1]),
+    pokemonName: firstLetterUpperCase(baseData.name),
+    pokemonNumber: generatePokemonNumber(baseData.number - 1),
+    pokemonIdent: baseData.number,
+  };
+}
+
+function declareExtendedBaseDataVariables(pokemonID) {
+  let baseData = currentPokemonData[pokemonID];
+
+  return {
+    pokemonHeight: baseData.height / 10,
+    pokemonWeight: baseData.weight / 10,
+    pokemonAbility1: firstLetterUpperCase(baseData.abilities[0]),
+    pokemonAbility2:
+      checkIfDefined(baseData.abilities[1]) +
+      firstLetterUpperCase(baseData.abilities[1]),
+    pokemonAbility3:
+      checkIfDefined(baseData.abilities[2]) +
+      firstLetterUpperCase(baseData.abilities[2]),
+  };
+}
+
+function declareSpeciesDataVariables(pokemonID) {
   let speciesData = currentSpeciesData[pokemonID];
 
-  pokemonType1 = baseData.types[0];
-  pokemonType2 = baseData.types[1];
-  typePlate1 = firstLetterUpperCase(pokemonType1);
-  typePlate2 = firstLetterUpperCase(pokemonType2);
-  pokemonName = firstLetterUpperCase(baseData.name);
-  pokemonIdent = baseData.number;
-  pokemonNumber = generatePokemonNumber(baseData.number - 1);
-  pokemonSpecies = speciesData.species;
-  pokemonHeight = baseData.height / 10;
-  pokemonWeight = baseData.weight / 10;
-  pokemonAbility1 = firstLetterUpperCase(baseData.abilities[0]);
-  pokemonAbility2 =
-    checkIfDefined(baseData.abilities[1]) +
-    firstLetterUpperCase(baseData.abilities[1]);
-  pokemonAbility3 =
-    checkIfDefined(baseData.abilities[2]) +
-    firstLetterUpperCase(baseData.abilities[2]);
-  pokemonGender = getPokemonGender(speciesData);
-  pokemonEggGroup1 = firstLetterUpperCase(speciesData.egg_groups[0]);
-  pokemonEggGroup2 =
-    checkIfDefined(speciesData.egg_groups[1]) +
-    firstLetterUpperCase(speciesData.egg_groups[1]);
-  pokemonEggCycle = speciesData.egg_cycle;
+  return {
+    pokemonSpecies: speciesData.species,
+    pokemonGender: getPokemonGender(speciesData),
+    pokemonEggGroup1: firstLetterUpperCase(speciesData.egg_groups[0]),
+    pokemonEggGroup2:
+      checkIfDefined(speciesData.egg_groups[1]) +
+      firstLetterUpperCase(speciesData.egg_groups[1]),
+    pokemonEggCycle: speciesData.egg_cycle,
+  };
+}
 
-  pokemonBaseStatHP = baseData.base_stats[0].value;
-  pokemonBaseStatAtk = baseData.base_stats[1].value;
-  pokemonBaseStatDef = baseData.base_stats[2].value;
-  pokemonBaseStatSpAtk = baseData.base_stats[3].value;
-  pokemonBaseStatSpDef = baseData.base_stats[4].value;
-  pokemonBaseStatSpeed = baseData.base_stats[5].value;
-  pokemonBaseStatTotal =
+function declareBaseStatsVariables(pokemonID) {
+  let baseData = currentPokemonData[pokemonID];
+
+  let pokemonBaseStatHP = baseData.base_stats[0].value;
+  let pokemonBaseStatAtk = baseData.base_stats[1].value;
+  let pokemonBaseStatDef = baseData.base_stats[2].value;
+  let pokemonBaseStatSpAtk = baseData.base_stats[3].value;
+  let pokemonBaseStatSpDef = baseData.base_stats[4].value;
+  let pokemonBaseStatSpeed = baseData.base_stats[5].value;
+
+  let pokemonBaseStatTotal =
     pokemonBaseStatHP +
     pokemonBaseStatAtk +
     pokemonBaseStatDef +
     pokemonBaseStatSpAtk +
     pokemonBaseStatSpDef +
     pokemonBaseStatSpeed;
+
+  return {
+    pokemonBaseStatHP,
+    pokemonBaseStatAtk,
+    pokemonBaseStatDef,
+    pokemonBaseStatSpAtk,
+    pokemonBaseStatSpDef,
+    pokemonBaseStatSpeed,
+    pokemonBaseStatTotal,
+  };
 }
 
 function declareEvolutionVariables(pokemonID) {
@@ -126,9 +156,11 @@ function declareEvolutionVariables(pokemonID) {
   for (let index = 0; index < evolutionData.evolutionChain.length; index++) {
     let evolution = {
       pokemonEvolutionID: evolutionData.evolutionChain[index].pokemonID,
-      pokemonEvolutionName: firstLetterUpperCase(evolutionData.evolutionChain[index].name),
-      pokemonEvolutionImage: evolutionData.evolutionChain[index].imageUrl
-    }
+      pokemonEvolutionName: firstLetterUpperCase(
+        evolutionData.evolutionChain[index].name
+      ),
+      pokemonEvolutionImage: evolutionData.evolutionChain[index].imageUrl,
+    };
     pokemonEvolutions.push(evolution);
   }
   return pokemonEvolutions;

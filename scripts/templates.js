@@ -1,4 +1,4 @@
-function getOverviewPokemonCardRef(pokemonID) {
+function getOverviewPokemonCardRef(pokemonID, pokemonData) {
   return `
       <div onclick="generatePokemonDetailCard(${pokemonID})" class="card-wrapper">
           <img
@@ -6,20 +6,20 @@ function getOverviewPokemonCardRef(pokemonID) {
               src="./img/transparent-pokeball.png"
               alt=""
           />
-          <div class="pokemon-card ${pokemonType1}">
+          <div class="pokemon-card ${pokemonData.pokemonType1}">
               <div class="pokemon-header">
-                  <h2 class="pokemon-name">${pokemonName}</h2>
-                  <span class="pokemon-number">${pokemonNumber}</span>
+                  <h2 class="pokemon-name">${pokemonData.pokemonName}</h2>
+                  <span class="pokemon-number">${pokemonData.pokemonNumber}</span>
               </div>
               <div class="pokemon-body">
                   <div class="pokemon-types">
-                      <span class="type ${pokemonType1}">${typePlate1}</span>
-                      <span class="type ${pokemonType2}">${typePlate2}</span>
+                      <span class="type ${pokemonData.pokemonType1}">${pokemonData.typePlate1}</span>
+                      <span class="type ${pokemonData.pokemonType2}">${pokemonData.typePlate2}</span>
                   </div>
                   <img
                       class="pokemon-image"
-                      src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonIdent}.png"
-                      alt="${pokemonName}"
+                      src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonData.pokemonIdent}.png"
+                      alt="${pokemonData.pokemonName}"
                   />
               </div>
           </div>
@@ -27,19 +27,19 @@ function getOverviewPokemonCardRef(pokemonID) {
       <div id="pokemonDetailDialog"></div>`;
 }
 
-function getDetailPokemonCardRef(pokemonID) {
+function getDetailPokemonCardRef(pokemonID, pokemonData) {
   return `
       <div
         onclick="toggleDisplayNone('pokemonDetailBody')"
         id="pokemonDetailBody"
         class="dialog-wrapper"
       >
-        <div onclick="stopEventBubbling(event)" class="dialog detail-${pokemonType1}">
+        <div onclick="stopEventBubbling(event)" class="dialog detail-${pokemonData.pokemonType1}">
           <div class="dialog-intro">
             <div class="dialog-intro-background"></div>
             <div class="dialog-header">
               <div class="dialog-header-number">
-                <span>${pokemonNumber}</span>
+                <span>${pokemonData.pokemonNumber}</span>
                 <span
                   onclick="toggleDisplayNone('pokemonDetailBody')"
                   class="close-dialog"
@@ -47,18 +47,18 @@ function getDetailPokemonCardRef(pokemonID) {
                 >
               </div>
               <div class="dialog-header-name">
-                <h2 class="dialog-pokemon-name">${pokemonName}</h2>
+                <h2 class="dialog-pokemon-name">${pokemonData.pokemonName}</h2>
                 <div class="pokemon-types flex-direction-row">
-                  <span class="type ${pokemonType1} margin-right-10px z-index-2">${typePlate1}</span>
-                  <span class="type ${pokemonType2} z-index-2">${typePlate2}</span>
+                  <span class="type ${pokemonData.pokemonType1} margin-right-10px z-index-2">${pokemonData.typePlate1}</span>
+                  <span class="type ${pokemonData.pokemonType2} z-index-2">${pokemonData.typePlate2}</span>
                 </div>
               </div>
             </div>
             <div class="dialog-artwork">
               <img
                 class="dialog-artwork-image"
-                src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonIdent}.png"
-                alt="${pokemonName}"
+                src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonData.pokemonIdent}.png"
+                alt="${pokemonData.pokemonName}"
               />
 
             </div>
@@ -68,14 +68,14 @@ function getDetailPokemonCardRef(pokemonID) {
               <button
                 id="tabAbout"
                 class="dialog-tablink activeTab"
-                onclick="generateTabContentAbout()"
+                onclick="generateTabContentAbout(${pokemonID})"
               >
                 About
               </button>
               <button
                 id="tabBaseStats"
                 class="dialog-tablink"
-                onclick="generateTabContentBaseStats()"
+                onclick="generateTabContentBaseStats(${pokemonID})"
               >
                 Base Stats
               </button>
@@ -105,44 +105,44 @@ function getDetailPokemonCardRef(pokemonID) {
       </div>`;
 }
 
-function getTabContentAboutRef() {
+function getTabContentAboutRef(pokemonData, speciesData) {
   return `
           <table class="pokemon-info-table">
               <tr>
                   <td>Species:</td>
-                  <td>${pokemonSpecies}</td>
+                  <td>${speciesData.pokemonSpecies}</td>
               </tr>
               <tr>
                   <td>Height:</td>
-                  <td>${pokemonHeight} m</td>
+                  <td>${pokemonData.pokemonHeight} m</td>
               </tr>
               <tr>
                   <td>Weight:</td>
-                  <td>${pokemonWeight} kg</td>
+                  <td>${pokemonData.pokemonWeight} kg</td>
               </tr>
               <tr>
                   <td>Abilities:</td>
-                  <td>${pokemonAbility1}${pokemonAbility2}${pokemonAbility3}</td>
+                  <td>${pokemonData.pokemonAbility1}${pokemonData.pokemonAbility2}${pokemonData.pokemonAbility3}</td>
               </tr>
           </table>
           <h4>Breeding</h4>
           <table class="pokemon-info-table">
               <tr>
                   <td>Gender:</td>
-                  <td>${pokemonGender}</td>
+                  <td>${speciesData.pokemonGender}</td>
               </tr>
               <tr>
                   <td>Egg Groups:</td>
-                  <td>${pokemonEggGroup1}${pokemonEggGroup2}</td>
+                  <td>${speciesData.pokemonEggGroup1}${speciesData.pokemonEggGroup2}</td>
               </tr>
               <tr>
                   <td>Egg Cycle:</td>
-                  <td>${pokemonEggCycle} cycles</td>
+                  <td>${speciesData.pokemonEggCycle} cycles</td>
               </tr>
           </table>`;
 }
 
-function getTabContentBaseStatsRef() {
+function getTabContentBaseStatsRef(baseStats) {
   const maxHP = 255;
   const maxAttack = 190;
   const maxDefense = 250;
@@ -155,11 +155,11 @@ function getTabContentBaseStatsRef() {
           <table class="pokemon-info-table">
           <tr>
             <td>HP</td>
-            <td class="text-right">${pokemonBaseStatHP}</td>
+            <td class="text-right">${baseStats.pokemonBaseStatHP}</td>
             <td>
               <div class="bar-container">
                 <div class="bar" style="width: ${getBarWidth(
-                  pokemonBaseStatHP,
+                  baseStats.pokemonBaseStatHP,
                   maxHP
                 )}%; background-color: #FF5959;"></div>
               </div>
@@ -167,11 +167,11 @@ function getTabContentBaseStatsRef() {
           </tr>
           <tr>
             <td>Attack</td>
-            <td class="text-right">${pokemonBaseStatAtk}</td>
+            <td class="text-right">${baseStats.pokemonBaseStatAtk}</td>
             <td>
               <div class="bar-container">
                 <div class="bar" style="width: ${getBarWidth(
-                  pokemonBaseStatAtk,
+                  baseStats.pokemonBaseStatAtk,
                   maxAttack
                 )}%; background-color: #F5AC78;"></div>
               </div>
@@ -179,11 +179,11 @@ function getTabContentBaseStatsRef() {
           </tr>
           <tr>
             <td>Defense</td>
-            <td class="text-right">${pokemonBaseStatDef}</td>
+            <td class="text-right">${baseStats.pokemonBaseStatDef}</td>
             <td>
               <div class="bar-container">
                 <div class="bar" style="width: ${getBarWidth(
-                  pokemonBaseStatDef,
+                  baseStats.pokemonBaseStatDef,
                   maxDefense
                 )}%; background-color: #FAE078;"></div>
               </div>
@@ -191,11 +191,11 @@ function getTabContentBaseStatsRef() {
           </tr>
           <tr>
             <td>Sp. Atk.</td>
-            <td class="text-right">${pokemonBaseStatSpAtk}</td>
+            <td class="text-right">${baseStats.pokemonBaseStatSpAtk}</td>
             <td>
               <div class="bar-container">
                 <div class="bar" style="width: ${getBarWidth(
-                  pokemonBaseStatSpAtk,
+                  baseStats.pokemonBaseStatSpAtk,
                   maxSpAtk
                 )}%; background-color: #9DB7F5;"></div>
               </div>
@@ -203,11 +203,11 @@ function getTabContentBaseStatsRef() {
           </tr>
           <tr>
             <td>Sp. Def.</td>
-            <td class="text-right">${pokemonBaseStatSpDef}</td>
+            <td class="text-right">${baseStats.pokemonBaseStatSpDef}</td>
             <td>
               <div class="bar-container">
                 <div class="bar" style="width: ${getBarWidth(
-                  pokemonBaseStatSpDef,
+                  baseStats.pokemonBaseStatSpDef,
                   maxSpDef
                 )}%; background-color: #A7DB8D;"></div>
               </div>
@@ -215,11 +215,11 @@ function getTabContentBaseStatsRef() {
           </tr>
           <tr>
             <td>Speed</td>
-            <td class="text-right">${pokemonBaseStatSpeed}</td>
+            <td class="text-right">${baseStats.pokemonBaseStatSpeed}</td>
             <td>
               <div class="bar-container">
                 <div class="bar" style="width: ${getBarWidth(
-                  pokemonBaseStatSpeed,
+                  baseStats.pokemonBaseStatSpeed,
                   maxSpeed
                 )}%; background-color: #FA92B2;"></div>
               </div>
@@ -227,11 +227,11 @@ function getTabContentBaseStatsRef() {
           </tr>
           <tr>
             <td>Total</td>
-            <td class="text-right">${pokemonBaseStatTotal}</td>
+            <td class="text-right">${baseStats.pokemonBaseStatTotal}</td>
             <td>
               <div class="bar-container">
                 <div class="bar" style="width: ${getBarWidth(
-                  pokemonBaseStatTotal,
+                  baseStats.pokemonBaseStatTotal,
                   maxTotal
                 )}%; background-color: #D3D3D3;"></div>
               </div>

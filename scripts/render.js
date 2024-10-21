@@ -21,36 +21,39 @@ function generateOverviewPokemonCard() {
   pokedexContentRef.innerHTML = "";
 
   for (pokemonID = 0; pokemonID < currentPokemonData.length; pokemonID++) {
-    declareVariables(pokemonID);
-    pokedexContentRef.innerHTML += getOverviewPokemonCardRef(pokemonID);
+    let pokemonData = declareBaseDataVariables(pokemonID);
+    pokedexContentRef.innerHTML += getOverviewPokemonCardRef(pokemonID, pokemonData);
   }
 }
 
 function generatePokemonDetailCard(pokemonID) {
   let dialogContentRef = document.getElementById("pokemonDetailDialog");
+  let pokemonData = declareBaseDataVariables(pokemonID);
 
   dialogContentRef.innerHTML = "";
 
-  declareVariables(pokemonID);
-  dialogContentRef.innerHTML = getDetailPokemonCardRef(pokemonID);
-  generateTabContentAbout();
+  dialogContentRef.innerHTML = getDetailPokemonCardRef(pokemonID, pokemonData);
+  generateTabContentAbout(pokemonID);
   
   document.body.classList.add("hide-scrollbar");
 }
 
-function generateTabContentAbout() {
+function generateTabContentAbout(pokemonID) {
   let tabContentRef = document.getElementById("tabContent");
+  let pokemonData = declareExtendedBaseDataVariables(pokemonID);
+  let speciesData = declareSpeciesDataVariables(pokemonID);
 
   tabContentRef.innerHTML = "";
-  tabContentRef.innerHTML = getTabContentAboutRef();
+  tabContentRef.innerHTML = getTabContentAboutRef(pokemonData, speciesData);
   markedActive("tabAbout");
 }
 
-function generateTabContentBaseStats() {
+function generateTabContentBaseStats(pokemonID) {
   let tabContentRef = document.getElementById("tabContent");
+  let baseStats = declareBaseStatsVariables(pokemonID);
 
   tabContentRef.innerHTML = "";
-  tabContentRef.innerHTML = getTabContentBaseStatsRef();
+  tabContentRef.innerHTML = getTabContentBaseStatsRef(baseStats);
   markedActive("tabBaseStats");
 }
 
