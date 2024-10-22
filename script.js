@@ -21,9 +21,7 @@ async function init() {
 
 async function loadData() {
   for (pokemonID = counterID; pokemonID < counterDataset; pokemonID++) {
-    await getPokemonBaseData(pokemonID);
-    await getPokemonSpeciesData(pokemonID);
-    await getPokemonEvolutionData(pokemonID);
+    await getPokemonData(pokemonID);
   }
 }
 

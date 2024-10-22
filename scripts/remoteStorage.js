@@ -2,56 +2,43 @@ let pokemonBaseData = [];
 let pokemonSpeciesData = [];
 let pokemonEvolutionData = [];
 
-async function getPokemonBaseData(pokemonID) {
+async function getPokemonData(pokemonID) {
   const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonID}`;
-
-  try {
-    const pokemonResponse = await fetch(pokemonUrl);
-    const pokemonData = await pokemonResponse.json();
-
-    const newPokemon = generatePokemonBaseDataArr(pokemonData);
-    pokemonBaseData.push(newPokemon);
-  } catch (error) {
-    console.error("Error when retrieving Pokémon data: ", error);
-  }
-}
-
-async function getPokemonSpeciesData(pokemonID) {
   const speciesUrl = `https://pokeapi.co/api/v2/pokemon-species/${pokemonID}`;
 
   try {
-    const speciesResponse = await fetch(speciesUrl);
-    const speciesData = await speciesResponse.json();
+    const [pokemonResponse, speciesResponse] = await Promise.all([
+      fetch(pokemonUrl),
+      fetch(speciesUrl),
+    ]);
 
-    const newPokemon = generatePokemonSpeciesDataArr(speciesData, pokemonID);
-    pokemonSpeciesData.push(newPokemon);
-  } catch (error) {
-    console.error("Error when retrieving species data: ", error);
-  }
-}
+    const [pokemonData, speciesData] = await Promise.all([
+      pokemonResponse.json(),
+      speciesResponse.json(),
+    ]);
 
-async function getPokemonEvolutionData(pokemonID) {
-  const speciesUrl = `https://pokeapi.co/api/v2/pokemon-species/${pokemonID}`;
+    const newPokemonBase = generatePokemonBaseDataArr(pokemonData);
+    pokemonBaseData.push(newPokemonBase);
 
-  try {
-    const speciesResponse = await fetch(speciesUrl);
-    const speciesData = await speciesResponse.json();
+    const newPokemonSpecies = generatePokemonSpeciesDataArr(
+      speciesData,
+      pokemonID
+    );
+    pokemonSpeciesData.push(newPokemonSpecies);
 
     const evolutionChainUrl = speciesData.evolution_chain.url;
-
     const evolutionChainResponse = await fetch(evolutionChainUrl);
     const evolutionChainData = await evolutionChainResponse.json();
 
     const evolutionArray = await generateEvolutionDataArr(
       evolutionChainData.chain
     );
-
     pokemonEvolutionData.push({
       pokemonID: pokemonID,
       evolutionChain: evolutionArray,
     });
   } catch (error) {
-    console.error("Error when retrieving the evolutionary chain: ", error);
+    console.error("Fehler beim Abrufen der Pokémon-Daten:", error);
   }
 }
 

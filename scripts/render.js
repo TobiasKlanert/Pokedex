@@ -88,12 +88,16 @@ function markedActive(tab) {
 function showPreviousPokemon(pokemonID) {
   if (pokemonID - 1 >= 0) {
     generatePokemonDetailCard(pokemonID - 1);
+  } else {
+    generatePokemonDetailCard(pokemonBaseData.length-1);
   }
 }
 
 function showNextPokemon(pokemonID) {
   if (pokemonID + 1 <= currentPokemonData.length - 1) {
     generatePokemonDetailCard(pokemonID + 1);
+  } else {
+    generatePokemonDetailCard(0);
   }
 }
 
